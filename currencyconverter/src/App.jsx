@@ -4,12 +4,10 @@ import InputBox from './components/InputBox'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0);
-
   const [amount, setAmount] = useState(0)
   const [convertTedAmount, setConvertTedAmount] = useState(0)
-  const [currencyFrom, setCurrencyFrom] = useState("eur")
-  const [currencyTo, setCurrencyTo] = useState("eur")
+  const [currencyFrom, setCurrencyFrom] = useState("usd")
+  const [currencyTo, setCurrencyTo] = useState("inr")
 
   // let currencyInfo = useCurrencyInfo(currencyFrom, currencyTo);
   let currencyInfo  = {
@@ -41,6 +39,13 @@ function App() {
     console.log(currencyInfo[currencyFrom][currencyTo]);
     console.log(convertedAmount1);
   }
+  const swap = () => {
+    setCurrencyFrom(currencyTo);
+    setCurrencyTo(currencyFrom);
+    setAmount(convertTedAmount.toFixed(2));
+    setConvertTedAmount(amount.toFixed(2));
+
+  }
   return (
     <>
     <form
@@ -58,28 +63,28 @@ function App() {
               label="From"
               currencyOptions={options}
               amount={amount}
-              currencyFrom={currencyFrom}
+              currency={currencyFrom}
               onAmountChange={(amount) => setAmount(amount)}
               onCurrencyChange={(curr) => setCurrencyFrom(curr)}
               
           />
         </div>
         <div className="flex justify-center items-center mb-4">
-          <button className="bg-purple-600 text-white rounded-lg px-4 py-1">swap</button>
+          <button className="bg-purple-600 text-white rounded-lg px-4 py-1" onClick={swap}>swap</button>
         </div>
         <div className="mb-6">
           <InputBox 
               label="To"
               currencyOptions={options}
               amount={convertTedAmount}
-              currencyTo={currencyTo}
+              currency={currencyTo}
               // onAmountChange={(amount) => setConvertTedAmount(amount)}
               onCurrencyChange={(curr) => setCurrencyTo(curr)}
               amountDisable = {true}
               
           />
         </div>
-        <button type="submit" className="bg-purple-600 text-white rounded-lg w-full py-2">Convert USD to INR</button>
+        <button type="submit" className="bg-purple-600 text-white rounded-lg w-full py-2">Convert {currencyFrom.charAt(0).toUpperCase()+currencyFrom.slice(1)} to {currencyTo.charAt(0).toUpperCase()+currencyTo.slice(1)}</button>
       </div>
     </div>
     </form>

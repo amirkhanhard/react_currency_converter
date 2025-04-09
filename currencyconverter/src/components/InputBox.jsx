@@ -15,7 +15,7 @@ return (
           <div className="flex items-center space-x-2 mt-1">
             <input type="number" className="border border-gray-300 rounded-lg p-2 w-full"
                     value={amount}
-                    onChange={(e) => onAmountChange && onAmountChange(Number(e.target.value))}
+                    onChange={(e) => onAmountChange && e.target.value!=0 && onAmountChange(Number(e.target.value))}
                     disabled={amountDisable}
                     />
             <select className="border border-gray-300 rounded-lg p-2"
