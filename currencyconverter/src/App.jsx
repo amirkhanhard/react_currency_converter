@@ -4,46 +4,49 @@ import InputBox from './components/InputBox'
 import './App.css'
 
 function App() {
-  const [amount, setAmount] = useState(0)
-  const [convertTedAmount, setConvertTedAmount] = useState(0)
+  const [amount, setAmount] = useState("")
+  const [convertTedAmount, setConvertTedAmount] = useState("")
   const [currencyFrom, setCurrencyFrom] = useState("usd")
   const [currencyTo, setCurrencyTo] = useState("inr")
 
   // let currencyInfo = useCurrencyInfo(currencyFrom, currencyTo);
   let currencyInfo  = {
     "eur" : {
-        "usd" : 1.10,
-        "inr" : 94.64,
-        "eur" : 1
+        "usd" : 1.100,
+        "inr" : 94.640,
+        "eur" : 1.00
     },
     "inr" : {
       "usd" : 0.012,
-      "euro" : 0.011,
-      "inr" : 1
+      "eur" : 0.011,
+      "inr" : 1.00
     },
     "usd" : {
-      "inr" : 86.41,
-      "euro" : 0.91,
-      "usd" : 1
+      "inr" : 86.410,
+      "eur" : 0.910,
+      "usd" : 1.00
     }
   };
   console.log(currencyInfo);
   const options = Object.keys(currencyInfo)
 
   const convert = () => {
-    let convertedAmount1 = amount * currencyInfo[currencyFrom][currencyTo];
-    setConvertTedAmount(convertedAmount1);
+    if(amount == "" ) {
+      return;
+    }
+    let convertTedAmount1 = amount * currencyInfo[currencyFrom][currencyTo];
+    setConvertTedAmount(Number(convertTedAmount1.toFixed(2)));
     console.log(amount);
     console.log(currencyFrom);
     console.log(currencyTo);
     console.log(currencyInfo[currencyFrom][currencyTo]);
-    console.log(convertedAmount1);
+    console.log(convertTedAmount1);
   }
   const swap = () => {
     setCurrencyFrom(currencyTo);
     setCurrencyTo(currencyFrom);
-    setAmount(convertTedAmount.toFixed(2));
-    setConvertTedAmount(amount.toFixed(2));
+    setConvertTedAmount(amount);
+    setAmount(convertTedAmount);
 
   }
   return (
@@ -70,7 +73,7 @@ function App() {
           />
         </div>
         <div className="flex justify-center items-center mb-4">
-          <button className="bg-purple-600 text-white rounded-lg px-4 py-1" onClick={swap}>swap</button>
+          <button className="bg-purple-600 text-white rounded-lg px-4 py-1" type="button" onClick={swap}>swap</button>
         </div>
         <div className="mb-6">
           <InputBox 
