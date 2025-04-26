@@ -1,6 +1,9 @@
 Build a Simple Currency Converter in React - Beginner React Project Tutorial
 
 
+1. npm  create vite@latest dir_name
+2. npm install tailwindcss @tailwindcss/vite
+
 
 "Step-by-step tutorial to build a functional currency converter using React. Perfect beginner project to learn React hooks, state management and API integration."
 
